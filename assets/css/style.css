@@ -1,7 +1,16 @@
 body {
     background-image: url("../images/vintage-concrete.png");
 }
-
+button {
+    border-radius: 5px;
+    border: 3px solid #AB6E02;
+}
+p {
+    line-height: 150%;
+    margin-left: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #444;
+}
 /* CSS for Character Selection Screen */
 .hero-selection {
     display: grid;
@@ -9,7 +18,25 @@ body {
     grid-template-rows: 400px 50px;
     grid-gap: 10px;
     padding: 10px;
+    width: 980px;
+    margin: auto;
     
+}
+h1 {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+h2 {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+#hero-info {
+    border: 5px solid black;
+    width: 90%;
+    margin: auto;
+    height: 200px;
 }
 .mage {
     background-image: url(../images/mage.jpg);
@@ -26,7 +53,11 @@ body {
     background-size: 100%;
     
 }
-
+.hero:hover {
+    transform: scale(1.05);
+    border-radius: 10px;
+    border: 3px solid orange;
+}
 .hero-btn:hover {
     transform: scale(1.05);
     background-color: #359AAC;
@@ -37,10 +68,11 @@ body {
 /* CSS for Game page */
 #game-box {
     width: 980px;
-    height: 800px;
+    height: 850px;
     background: linear-gradient(45deg, #444, white, #444);
     margin: auto;
-
+    display: none;
+    
 }
 
 #grid-container {
@@ -58,10 +90,6 @@ body {
     background-size: 100%;
     box-shadow: 10px 10px 5px grey;
 }
-.grid:hover {
-    background-image: url(../images/question-mark-orange.jpg);
-    transform: scale(1.1);
-}
 
 #player-card{
     
@@ -69,19 +97,18 @@ body {
     float: left;
     width: 400px;
     height: 400px;
-    margin: 32.8px 0 32.8px 32.8px    
+    margin: 32.8px 0 0 32.8px;    
 }
 #sword {
     width:80px;
-    left: 520px;
-    position: absolute;
-    top: 350px;
+    position: relative;
+    top: 150px;
     margin:5px;    
 }
 #enemy-card{
     float:right;
     border-radius: 10px;
-    margin: 32.8px 32.8px 32.8px 0;
+    margin: 32.8px 32.8px 0 0;
     height: 400px;
     width: 400px;
 }
@@ -113,13 +140,22 @@ body {
     position: relative;
     width: 400px;
     height: 200px;
-    display:inline-block;
+    top: 370px;
+    left: 32.8px;
     border: 5px solid black;
 }
 .log-box {
     position: relative;
     width: 400px;
     height: 200px;
-    display: inline-block;
+    top: 24.8px;
+    right: 32.8px;
+    float:right;
     border: 5px solid black;
+}
+.action {
+    position:relative;
+    top: 0;
+    float: none;
+    
 }
