@@ -6,24 +6,25 @@ body {
 .hero-selection {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 330px 50px;
+    grid-template-rows: 400px 50px;
     grid-gap: 10px;
+    padding: 10px;
     
 }
 .mage {
     background-image: url(../images/mage.jpg);
     background-size: 100%;
-    box-shadow: 5px 5px gray;
+    
 }
 .vampire {
     background-image: url(../images/vampire.jpg);
     background-size: 100%;
-    box-shadow: 5px 5px gray;
+    
 }
 .warrior {
     background-image: url(../images/warrior.jpg);
     background-size: 100%;
-    box-shadow: 5px 5px gray;
+    
 }
 
 .hero-btn:hover {
@@ -72,7 +73,7 @@ body {
 }
 #sword {
     width:80px;
-    display: inline-block;
+    left: 520px;
     position: absolute;
     top: 350px;
     margin:5px;    
@@ -107,4 +108,18 @@ body {
     background-size: 100%;
     border: 5px solid #359AAC
 
+}
+.action-box {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    display:inline-block;
+    border: 5px solid black;
+}
+.log-box {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    display: inline-block;
+    border: 5px solid black;
 }
