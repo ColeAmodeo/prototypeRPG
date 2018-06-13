@@ -55,6 +55,9 @@ var enemies =  {
         defense: 100,
     }
 }  
+var currentMonster;
+var enemyIndex = 1;
+
 function monsterAttack(x){
     if (mage.magePick === true) {
     return (Math.floor((Math.random() * 10) * x) - 5)
@@ -66,34 +69,37 @@ function monsterAttack(x){
 
 }
 
+
 // Hero Selection
 $("#mage-btn").click(function(){
     mage.magePick = true;
-    vampire.vampirePick = false;
-    warrior.warriorPick = false; 
     $('#game-box').css('display', "block");
     $('#hero-selection').css('display', "none"); 
     $(".player-portrait").css("background-image", "url('assets/images/mage.jpg')");
-    return mage.magePick, vampire.vampirePick, warrior.warriorPick;
-    
+    $(".player-stats").find("h1").text("Sabrina, The Mage");
+    $(".player-stats").find("h2").text("Health Points: " + mage.health);
+    monsterPush();
+    return mage.magePick;   
 })
 $("#vampire-btn").click(function(){
-    mage.magePick = false;
     vampire.vampirePick = true;
-    warrior.warriorPick = false; 
     $('#game-box').css('display', "block");
     $('#hero-selection').css('display', "none"); 
     $(".player-portrait").css("background-image", "url('assets/images/vampire.jpg')");
-    return mage.magePick, vampire.vampirePick, warrior.warriorPick;
-})   
+    $(".player-stats").find("h1").text("Regis, The Vampire");
+    $(".player-stats").find("h2").text("Health Points: " + vampire.health);
+    monsterPush();
+    return vampire.vampirePick;
+})
 $("#warrior-btn").click(function(){
-    mage.magePick = false;
-    vampire.vampirePick = false;
     warrior.warriorPick = true; 
     $('#game-box').css('display', "block");
     $('#hero-selection').css('display', "none"); 
     $(".player-portrait").css("background-image", "url('assets/images/warrior.jpg')");
-    return magePick, vampirePick, warriorPick;
+    $(".player-stats").find("h1").text("Heimdall, The Warrior");
+    $(".player-stats").find("h2").text("Health Points: " + warrior.health)
+    monsterPush();
+    return warrior.warriorPick;
 })
 $(".mage").hover(function(){
     $("#hero-info").html("<p><u>Sabrina: The Mage</u></p> <p>A Powerful enchanter, specializes in dealing high damage</p> <p>Has the ability to unleash stored energy in a large concentrated burst</p>")
@@ -104,7 +110,67 @@ $(".warrior").hover(function(){
 $(".vampire").hover(function(){
     $("#hero-info").html("<p><u>Regis: The Vampire</u></p> <p> An ancient overseer, maintains an average ability of both attack and defense</p> <p>Possesses the ability to feed on his opponents, restoring life and dealing damage</p>" )
 });
+
+
+
+//Game Logic
+
+// Monster Selection (This is super cluttered but i couldn't figure out a cleaner way to do what i want)
+function monsterPush() {
+    if (enemyIndex === 1) {
+        currentMonster = enemies.goblin;
+        $(".grid1").css("background-image", "url('assets/images/goblin.png')");
+        $(".enemy-portrait").css("background-image", "url('assets/images/goblin.png')");
+        $(".enemy-stats").find("h1").text("Todd, The Goblin");
+        $(".enemy-stats").find("h2").text("Health Points:" + currentMonster.health);
+        return currentMonster;
+    } else if (enemyIndex === 2) {
+        currentMonster = enemies.lizard;
+        $(".grid1").css("background-image", "url('assets/images/dead.png')");
+        $(".grid2").css("background-image", "url('assets/images/lizard.png')");
+        $(".enemy-portrait").css("background-image", "url('assets/images/lizard.png')");
+        $(".enemy-stats").find("h1").text("Feral Draconid");
+        $(".enemy-stats").find("h2").text("Health Points:" + currentMonster.health);    
+        return currentMonster
+    } else if (enemyIndex === 3) {
+        currentMonster = enemies.werewolf;
+        $(".grid2").css("background-image", "url('assets/images/dead.png')");
+        $(".grid3").css("background-image", "url('assets/images/werewolf.png')");
+        $(".enemy-portrait").css("background-image", "url('assets/images/werewolf.png')");
+        $(".enemy-stats").find("h1").text("Cursed Werewolf");
+        $(".enemy-stats").find("h2").text("Health Points:" + currentMonster.health);
+        return currentMonster; 
+    } else if (enemyIndex === 4) {
+        currentMonster = enemies.necromancer;
+        $(".grid3").css("background-image", "url('assets/images/dead.png')");
+        $(".grid4").css("background-image", "url('assets/images/necromancer.png')");
+        $(".enemy-portrait").css("background-image", "url('assets/images/necromancer.png')");
+        $(".enemy-stats").find("h1").text("Billy, The Necromancer");
+        $(".enemy-stats").find("h2").text("Health Points:" + currentMonster.health); 
+        return currentMonster;
+    } else if (enemyIndex === 5) {
+        currentMonster = enemies.ghost;
+        $(".grid4").css("background-image", "url('assets/images/dead.png')");
+        $(".grid5").css("background-image", "url('assets/images/ghost.png')");
+        $(".enemy-portrait").css("background-image", "url('assets/images/ghost.png')");
+        $(".enemy-stats").find("h1").text("Super Spooky Ghost");
+        $(".enemy-stats").find("h2").text("Health Points:" + currentMonster.health); 
+        return currentMonster;
+    } else {
+        currentMonster = enemies.shrek;
+        $(".grid5").css("background-image", "url('assets/images/dead.png')");
+        $(".grid6").css("background-image", "url('assets/images/shrek.png')");
+        $(".enemy-portrait").css("background-image", "url('assets/images/shrek.png')");
+        $(".enemy-stats").find("h1").text("THE GOD OF KINGS");
+        $(".enemy-stats").find("h2").text("Health Points:" + currentMonster.health); 
+        return currentMonster;
+    }
+}
+$("#attack-btn").click(function(){
+    
+    
+    monsterPush();
+    
+    
+})
 }); 
-
-
-   

@@ -3,7 +3,7 @@ body {
 }
 button {
     border-radius: 5px;
-    border: 3px solid #AB6E02;
+
 }
 p {
     line-height: 150%;
@@ -72,6 +72,7 @@ h2 {
     background: linear-gradient(45deg, #444, white, #444);
     margin: auto;
     display: none;
+    position: relative;
     
 }
 
@@ -137,10 +138,10 @@ h2 {
 
 }
 .action-box {
-    position: relative;
+    position: absolute;
     width: 400px;
     height: 200px;
-    top: 370px;
+    top: 604px;
     left: 32.8px;
     border: 5px solid black;
 }
@@ -155,7 +156,22 @@ h2 {
 }
 .action {
     position:relative;
-    top: 0;
+    display:block;
+    font-size: 25px;
+    margin:23px auto;
     float: none;
     
+}
+.animate {
+    animation-name: monster;
+    animation-duration: 3s;    
+}
+@keyframes monster {
+    0% {
+
+    } 20% {
+
+    } 40% {
+        
+    }
 }
