@@ -168,7 +168,7 @@ function monsterPush() {
 }
 $("#attack-btn").click(function(){
     
-    
+    enemyIndex++
     monsterPush();
     
     
