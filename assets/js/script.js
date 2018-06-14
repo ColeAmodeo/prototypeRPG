@@ -4,7 +4,7 @@ $(document).ready(function(){
 var mage = {
     magePick: false,
     health: 300,
-    attack: 8,
+    attack: 20,
     magicAttack: function () {
         return (Math.floor(Math.random() * 50) + 20)
     },
@@ -14,33 +14,33 @@ var mage = {
 var vampire = {
     vampirePick: false,
     health: 450,
-    attack: 5,
+    attack: 16,
     mana: 3,
 }
 var warrior = {
     warriorPick: false,
     health: 600,
-    attack: 5,
+    attack: 12,
     mana: 3,
 }
 var enemies =  {
     goblin: {
-        attack: monsterAttack(1),
+        attack: 3,
         health: 50,
         defense: 1,
     },
     lizard: {
-        attack: monsterAttack(3),
+        attack: 4,
         health: 100,
         defense: 2,
     }, 
     werewolf: {
-        attack: monsterAttack(3),
+        attack: 3,
         health: 300,
         defense: 5,
     }, 
     necromancer: {
-        attack: monsterAttack(5),
+        attack: 7,
         health: 250,
         defense: 2,
     }, 
@@ -58,13 +58,31 @@ var enemies =  {
 var currentMonster;
 var enemyIndex = 1;
 
+function playerAttack(x){
+    if (mage.magePick === true) {
+        return (Math.floor((Math.random() * 5) + mage.attack) - currentMonster.defense)
+    } else if (warrior.warriorPick === true) {
+        return (Math.floor((Math.random() * 5) + warrior.attack) - currentMonster.defense)
+    } else {
+        return (Math.floor((Math.random() * 5) + vampire.attack) - currentMonster.defense)
+    }
+}
 function monsterAttack(x){
     if (mage.magePick === true) {
-    return (Math.floor((Math.random() * 10) * x) - 5)
+    var dmg = (Math.floor((Math.random() * 5) * x) - 5)
+        if (dmg < 0) {
+            return 1
+        } else return dmg
     } else if (warrior.warriorPick === true) {
-    return (Math.floor((Math.random() * 10) * x) - 10)
+    var dmg = (Math.floor((Math.random() * 5) * x) - 10)
+    if (dmg < 0) {
+        return 1
+    } else return dmg
     } else {
-    return (Math.floor((Math.random() * 10) * x) - 7)
+    var dmg = (Math.floor((Math.random() * 5) * x) - 7)
+    if (dmg < 0) {
+        return 1
+    } else return dmg
     }
 
 }
@@ -167,10 +185,26 @@ function monsterPush() {
     }
 }
 $("#attack-btn").click(function(){
-    
-    enemyIndex++
-    monsterPush();
+    var myDMG = playerAttack()
+    var enemyDMG = monsterAttack(currentMonster.attack)
+
+    currentMonster.health = currentMonster.health - myDMG;
+    $('.enemy-stats').find('h2').text("Health Points:" + currentMonster.health)
+    mage.health = mage.health - enemyDMG;
+    $('.player-stats').find('h2').text('Health Points:' + mage.health)
+
+    if (currentMonster.health <= 0){
+        enemyIndex++
+        monsterPush();
+    } else if (mage.health <= 0) {
+        gameReset();
+    } else return currentMonster.health, mage.health;
     
     
 })
-}); 
+
+function gameReset() {
+    alert("YOU HAVE DIED LOL");
+
+}
+});
