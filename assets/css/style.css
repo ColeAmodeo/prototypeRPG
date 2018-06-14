@@ -32,6 +32,11 @@ h2 {
     margin: auto;
     text-align: center;
 }
+h3 {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
 #hero-info {
     border: 5px solid black;
     width: 90%;
@@ -161,17 +166,4 @@ h2 {
     margin:23px auto;
     float: none;
     
-}
-.animate {
-    animation-name: monster;
-    animation-duration: 3s;    
-}
-@keyframes monster {
-    0% {
-
-    } 20% {
-
-    } 40% {
-        
-    }
 }

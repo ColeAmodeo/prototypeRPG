@@ -3,11 +3,13 @@ $(document).ready(function(){
 
 var mage = {
     magePick: false,
-    health: 300,
+    health: 325,
     attack: 20,
     magicAttack: function () {
         return (Math.floor(Math.random() * 50) + 20)
-    },
+        }, 
+        
+    
     mana: 3,
     }
     
@@ -25,32 +27,33 @@ var warrior = {
 }
 var enemies =  {
     goblin: {
-        attack: 3,
+        attack: 2,
         health: 50,
         defense: 1,
     },
     lizard: {
-        attack: 4,
+        attack: 3,
         health: 100,
         defense: 2,
     }, 
     werewolf: {
         attack: 3,
-        health: 300,
+        health: 250,
         defense: 5,
     }, 
     necromancer: {
-        attack: 7,
+        attack: 5,
         health: 250,
         defense: 2,
     }, 
     ghost: {
-        attack: monsterAttack(6),
+        attack: 4,
         health: 350,
         defense: 10,
     } ,
+    //SHREK CANNOT BE DEFEATED HE IS ETERNAL
     shrek: {
-        attack: monsterAttack(10000),
+        attack: 10000,
         health: 420,
         defense: 100,
     }
@@ -120,7 +123,7 @@ $("#warrior-btn").click(function(){
     return warrior.warriorPick;
 })
 $(".mage").hover(function(){
-    $("#hero-info").html("<p><u>Sabrina: The Mage</u></p> <p>A Powerful enchanter, specializes in dealing high damage</p> <p>Has the ability to unleash stored energy in a large concentrated burst</p>")
+    $("#hero-info").html("<p><u>Sabrina: The Mage</u></p> <p>A Powerful enchanter, specializes in dealing high damage</p> <p>Has the ability to unleash stored energy in a large concentrated burst, which bypasses all defense!</p>")
 });
 $(".warrior").hover(function(){
     $("#hero-info").html("<p><u>Heimdall: The Warrior</u></p> <p> Sturdy vanguard of the mountains, specializes in blocking the brunt of attacks. While dealing less damage. </p> <p> Has the special ability of tanking up and regenerating some lost Health Points. </p>")
@@ -190,8 +193,10 @@ $("#attack-btn").click(function(){
 
     currentMonster.health = currentMonster.health - myDMG;
     $('.enemy-stats').find('h2').text("Health Points:" + currentMonster.health)
+    $('#player-dmg').text("You dealt " + myDMG + "damage!")
     mage.health = mage.health - enemyDMG;
     $('.player-stats').find('h2').text('Health Points:' + mage.health)
+    $('#enemy-dmg').text("You were dealt " + enemyDMG + "damage!")
 
     if (currentMonster.health <= 0){
         enemyIndex++
@@ -199,12 +204,37 @@ $("#attack-btn").click(function(){
     } else if (mage.health <= 0) {
         gameReset();
     } else return currentMonster.health, mage.health;
-    
-    
+        
 })
+
+$("#special-btn").click(function(){
+    if (mage.mana > 0) {
+        mage.mana--
+    $("#mana").text("Mana: " + mage.mana);
+        var myDMG = mage.magicAttack();
+        var enemyDMG = monsterAttack(currentMonster.attack);
+        currentMonster.health = currentMonster.health - myDMG;
+    $('.enemy-stats').find('h2').text("Health Points:" + currentMonster.health);
+    $('#player-dmg').text("You dealt " + myDMG + "damage!");
+    mage.health = mage.health - enemyDMG;
+    $('.player-stats').find('h2').text('Health Points:' + mage.health);
+    $('#enemy-dmg').text("You were dealt " + enemyDMG + "damage!");
+
+    if (currentMonster.health <= 0){
+        enemyIndex++
+        monsterPush();
+    } else if (mage.health <= 0) {
+        gameReset();
+    } else return currentMonster.health, mage.health;
+
+    } else alert("YOU HAVE NO MANA LEFT!")
+
+})
+
+
 
 function gameReset() {
     alert("YOU HAVE DIED LOL");
-
+    location.reload();
 }
 });
